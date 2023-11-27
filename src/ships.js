@@ -1,4 +1,4 @@
-function createShip(name, length, hits, sunk) {
+export default function createShip(name, length, hits, sunk) {
   return {
     name,
     length,
