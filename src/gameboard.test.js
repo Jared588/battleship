@@ -22,7 +22,7 @@ test('Get ship info', () => {
   myGameboard.placeShip('Patrol Boat', ['A1', 'A2']);
   const ship = myGameboard.getShipInfo('Patrol Boat');
   expect(ship.name).toBe('Patrol Boat');
-})
+});
 
 test('Ship can receive damage', () => {
   const myGameboard = gameboard();
@@ -31,14 +31,14 @@ test('Ship can receive damage', () => {
   myGameboard.receiveAttack('A1');
   const ship = myGameboard.getShipInfo('Patrol Boat');
   expect(ship.hits).toBe(1);
-})
+});
 
 test('Shot can miss', () => {
   const myGameboard = gameboard();
   myGameboard.initialize();
   myGameboard.placeShip('Patrol Boat', ['A1', 'A2']);
   expect(myGameboard.receiveAttack('A3')).toBe(null);
-})
+});
 
 test('Missed shots are recorded', () => {
   const myGameboard = gameboard();
@@ -47,4 +47,4 @@ test('Missed shots are recorded', () => {
   myGameboard.receiveAttack('A3');
   myGameboard.receiveAttack('A4');
   expect(myGameboard.getMissedShots()).toStrictEqual(['A3', 'A4']);
-})
+});
