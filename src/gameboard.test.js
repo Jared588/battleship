@@ -39,3 +39,12 @@ test('Shot can miss', () => {
   myGameboard.placeShip('Patrol Boat', ['A1', 'A2']);
   expect(myGameboard.receiveAttack('A3')).toBe(null);
 })
+
+test('Missed shots are recorded', () => {
+  const myGameboard = gameboard();
+  myGameboard.initialize();
+  myGameboard.placeShip('Patrol Boat', ['A1', 'A2']);
+  myGameboard.receiveAttack('A3');
+  myGameboard.receiveAttack('A4');
+  expect(myGameboard.getMissedShots()).toStrictEqual(['A3', 'A4']);
+})

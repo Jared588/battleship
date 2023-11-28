@@ -1,8 +1,10 @@
 import createShip from './ships';
 
 export default function gameboard() {
+  // Board
   const columns = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J'];
   let grid = [];
+  const missedShots = [];
 
   // Ships
   let Carrier;
@@ -95,7 +97,7 @@ export default function gameboard() {
           PatrolBoat.hit();
         }
       } else {
-        console.log('Miss!');
+        missedShots.push(position);
         return null;
       }
     },
@@ -118,5 +120,10 @@ export default function gameboard() {
       }
       return null;
     },
+
+    getMissedShots() {
+      console.log(missedShots)
+      return missedShots;
+    }
   };
 }
