@@ -4,6 +4,8 @@ export default function gameboard() {
   // Board
   const columns = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J'];
   let grid = [];
+  let numberOfHits = 0;
+  const hitShots = [];
   const missedShots = [];
 
   // Ships
@@ -87,14 +89,29 @@ export default function gameboard() {
       if (gridPoint.occupied === true) {
         if (gridPoint.ship === 'Carrier') {
           Carrier.hit();
+          hitShots.push(position);
+          numberOfHits += 1;
+          this.checkEndGame(numberOfHits);
         } else if (gridPoint.ship === 'Battleship') {
           Battleship.hit();
+          hitShots.push(position);
+          numberOfHits += 1;
+          this.checkEndGame(numberOfHits);
         } else if (gridPoint.ship === 'Destroyer') {
           Destroyer.hit();
+          hitShots.push(position);
+          numberOfHits += 1;
+          this.checkEndGame(numberOfHits);
         } else if (gridPoint.ship === 'Submarine') {
           Submarine.hit();
+          hitShots.push(position);
+          numberOfHits += 1;
+          this.checkEndGame(numberOfHits);
         } else if (gridPoint.ship === 'Patrol Boat') {
           PatrolBoat.hit();
+          hitShots.push(position);
+          numberOfHits += 1;
+          this.checkEndGame(numberOfHits);
         }
       } else {
         missedShots.push(position);
@@ -122,8 +139,15 @@ export default function gameboard() {
     },
 
     getMissedShots() {
-      console.log(missedShots)
       return missedShots;
-    }
+    },
+
+    getHitShots() {
+      return hitShots;
+    },
+
+    checkEndGame(hits) {
+      return hits === 16;
+    },
   };
 }
