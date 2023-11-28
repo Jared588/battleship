@@ -4,6 +4,13 @@ export default function gameboard() {
   const columns = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J'];
   let grid = [];
 
+  // Ships
+  let Carrier;
+  let Battleship;
+  let Destroyer;
+  let Submarine;
+  let PatrolBoat;
+
   return {
     initialize() {
       grid = [];
@@ -33,26 +40,32 @@ export default function gameboard() {
       position.forEach((point) => {
         const gridPoint = grid.find((cell) => cell.position === point);
         if (gridPoint && gridPoint.occupied === true) {
-            return;
+          // eslint-disable-next-line no-useless-return
+          return;
         }
       });
 
       // Create the ship
       let newShip;
       if (ship === 'Carrier' && carrierCount < 1) {
-        newShip = createShip('Carrier', 5, 0, false);
+        Carrier = createShip('Carrier', 5, 0, false);
+        newShip = Carrier;
         carrierCount += 1;
       } else if (ship === 'Battleship' && BattleshipCount < 1) {
-        newShip = createShip('Battleship', 4, 0, false);
+        Battleship = createShip('Battleship', 4, 0, false);
+        newShip = Battleship;
         BattleshipCount += 1;
       } else if (ship === 'Destroyer' && DestroyerCount < 1) {
-        newShip = createShip('Destroyer', 3, 0, false);
+        Destroyer = createShip('Destroyer', 3, 0, false);
+        newShip = Destroyer;
         DestroyerCount += 1;
       } else if (ship === 'Submarine' && SubmarineCount < 1) {
-        newShip = createShip('Submarine', 3, 0, false);
+        Submarine = createShip('Submarine', 3, 0, false);
+        newShip = Submarine;
         SubmarineCount += 1;
       } else if (ship === 'Patrol Boat' && PatrolBoatCount < 1) {
-        newShip = createShip('Patrol Boat', 2, 0, false);
+        PatrolBoat = createShip('Patrol Boat', 2, 0, false);
+        newShip = PatrolBoat;
         PatrolBoatCount += 1;
       } else return;
 
@@ -64,6 +77,46 @@ export default function gameboard() {
           gridPoint.ship = newShip.name;
         }
       });
+    },
+
+    // eslint-disable-next-line consistent-return
+    receiveAttack(position) {
+      const gridPoint = grid.find((cell) => cell.position === position);
+      if (gridPoint.occupied === true) {
+        if (gridPoint.ship === 'Carrier') {
+          Carrier.hit();
+        } else if (gridPoint.ship === 'Battleship') {
+          Battleship.hit();
+        } else if (gridPoint.ship === 'Destroyer') {
+          Destroyer.hit();
+        } else if (gridPoint.ship === 'Submarine') {
+          Submarine.hit();
+        } else if (gridPoint.ship === 'Patrol Boat') {
+          PatrolBoat.hit();
+        }
+      } else {
+        console.log('Miss!');
+        return null;
+      }
+    },
+
+    getShipInfo(ship) {
+      if (ship === 'Carrier') {
+        return Carrier;
+      }
+      if (ship === 'Battleship') {
+        return Battleship;
+      }
+      if (ship === 'Destroyer') {
+        return Destroyer;
+      }
+      if (ship === 'Submarine') {
+        return Submarine;
+      }
+      if (ship === 'Patrol Boat') {
+        return PatrolBoat;
+      }
+      return null;
     },
   };
 }
