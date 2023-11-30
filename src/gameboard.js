@@ -146,8 +146,12 @@ export default function gameboard() {
       return hitShots;
     },
 
+    getAllShots() {
+      return missedShots.concat(hitShots);
+    },
+
     checkEndGame(hits) {
       return hits === 16;
-    },
+    }
   };
 }
