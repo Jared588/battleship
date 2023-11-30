@@ -5,7 +5,7 @@ export default function createShip(name, length, hits, sunk) {
     hits,
     sunk,
 
-    hit () {
+    hit() {
       this.hits += 1;
     },
 
@@ -13,7 +13,7 @@ export default function createShip(name, length, hits, sunk) {
       return this.hits === this.length;
     },
 
-    displayInfo () {
+    displayInfo() {
       console.log(
         `${this.name} length:${this.length} hits:${this.hits} sunk:${this.sunk}`,
       );

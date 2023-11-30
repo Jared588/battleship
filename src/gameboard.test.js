@@ -55,10 +55,10 @@ test('Hit shots are recorded', () => {
   myGameboard.placeShip('Patrol Boat', ['A1', 'A2']);
   myGameboard.receiveAttack('A1');
   expect(myGameboard.getHitShots()).toStrictEqual(['A1']);
-})
+});
 
 test('All ships have been sunk', () => {
   const myGameboard = gameboard();
   myGameboard.initialize();
   expect(myGameboard.checkEndGame(16)).toBe(true);
-})
+});
