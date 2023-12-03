@@ -5,4 +5,3 @@ test('Start new game', () => {
     expect(game).toBeTruthy();
     expect(game.player).toBeTruthy();
 });
-

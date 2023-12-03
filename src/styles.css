@@ -24,7 +24,41 @@ header {
 }
 
 .main {
+    display: flex;
     flex: auto;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.gameboard {
+    display: grid;
+    grid-template-columns: repeat(10, 1fr);
+    grid-template-rows: repeat(10, 1fr);
+    border: 1px solid white;
+    height: 30rem;
+    width: 30rem;
+    margin: 0.5rem;
+}
+
+.gameboard > * {
+    border: 1px solid #ddd;
+}
+
+@media (max-width: 1000px) {
+    .gameboard {
+        height: 25rem;
+        width: 25rem;
+    }
+}
+
+@media (max-width: 860px) {
+    .gameboard {
+        height: 20rem;
+        min-height: 20rem;
+        width: 20rem;
+        min-width: 20rem;
+    }
 }
 
 footer {
