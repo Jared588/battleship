@@ -4,7 +4,10 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 module.exports = {
   mode: 'development',
   entry: {
-    index: './src/index.js'
+    index: './src/index.js',
+    ships: './src/ships.js',
+    player: './src/player.js',
+    gameloop: './src/gameloop.js'
   },
   plugins: [
     new HtmlWebpackPlugin({
