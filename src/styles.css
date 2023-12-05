@@ -42,7 +42,9 @@ header {
 }
 
 .gameboard > * {
-    border: 1px solid #ddd;
+    border: 1px solid #a3a3a3;
+    color: rgb(148, 148, 148);
+    font-family: 'Roboto', 'sans-serif';
 }
 
 @media (max-width: 1000px) {

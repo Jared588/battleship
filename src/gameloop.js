@@ -43,6 +43,11 @@ export default function gameloop() {
                 if(playerBoard.getHitShots().includes(playerBoard.getGrid()[i].position)) {
                     cell.style.backgroundColor = 'red';
                 }
+
+                if(playerBoard.getMissedShots().includes(playerBoard.getGrid()[i].position)) {
+                    cell.style.background = 'orange';
+                }
+
                 cell.textContent = playerBoard.getGrid()[i].position;
 
                 playerDisplay.appendChild(cell);
@@ -55,6 +60,10 @@ export default function gameloop() {
 
                 if(compBoard.getHitShots().includes(compBoard.getGrid()[i].position)) {
                     cell.style.backgroundColor = 'red';
+                }
+
+                if(compBoard.getMissedShots().includes(compBoard.getGrid()[i].position)) {
+                    cell.style.background = 'orange';
                 }
                 cell.textContent = compBoard.getGrid()[i].position;
 
