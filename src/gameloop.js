@@ -54,16 +54,22 @@ export default function gameloop() {
             }
 
             // Computer Board
-            let isPlayerTurn = true;
             for (let i = 0; i < compBoard.getGrid().length; i += 1) {
                 const cell = document.createElement('div');
                 cell.classList.add('cell');
                 cell.addEventListener('click', () => {
                     player.playerAttack(compBoard.getGrid()[i].position);
                     this.updateBoard();
+                    if(playerBoard.checkEndGame(compBoard.getNumberOfHits())) {
+                        alert('Player Wins!');
+                        return;
+                    }
                     setTimeout(() => {
                         player.compAttack();
                         this.updateBoard();
+                        if(playerBoard.checkEndGame(playerBoard.getNumberOfHits())) {
+                            alert('Computer Wins!');
+                        }
                     }, 800);
                 })
 
