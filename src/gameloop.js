@@ -1,9 +1,15 @@
 import createPlayer from './player'
+import modal from './modal';
 
 export default function gameloop() {
     const player = createPlayer();
     const playerBoard = player.getPlayerGameboard();
     const compBoard = player.getCompGameBoard();
+
+    // Modal prep
+    const welcomeModal = modal();
+    welcomeModal.initialize(playerBoard);
+    welcomeModal.startPlacement(playerBoard);
 
     /// temp player ships
     playerBoard.placeShip('Carrier', ['A1', 'A2', 'A3', 'A4', 'A5']);
