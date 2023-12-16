@@ -10,6 +10,7 @@ export default function gameloop() {
     const welcomeModal = modal();
     welcomeModal.initialize(playerBoard);
     welcomeModal.startPlaceSequence(playerBoard, 'Carrier', 5, 'x');
+    welcomeModal.displayInfo('Carrier');
 
     /// temp player ships
     playerBoard.placeShip('Carrier', ['A1', 'A2', 'A3', 'A4', 'A5']);

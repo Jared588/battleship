@@ -125,3 +125,22 @@ footer {
     width: 30rem;
     margin: 0.5rem;
 }
+
+#modal-info-container {
+    display: flex;
+    flex: auto;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+#ship-name {
+    font-family: 'Black Ops One', 'sans-serif';
+    font-size: 24px;
+    color: rgb(56, 194, 14);
+}
+
+.ship-icon {
+    width: fit-content;
+    height: 10rem;
+}

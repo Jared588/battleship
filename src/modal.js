@@ -61,6 +61,7 @@ export default function modal() {
             setTimeout(() => {
               this.initialize(board);
               this.startPlaceSequence(board, 'Battleship', 4, 'x');
+              this.displayInfo('Battleship');
             }, 100);
           }
 
@@ -76,6 +77,7 @@ export default function modal() {
             setTimeout(() => {
               this.initialize(board);
               this.startPlaceSequence(board, 'Destroyer', 3, 'x');
+              this.displayInfo('Destroyer');
             }, 100);
           }
 
@@ -90,6 +92,7 @@ export default function modal() {
             setTimeout(() => {
               this.initialize(board);
               this.startPlaceSequence(board, 'Submarine', 3, 'x');
+              this.displayInfo('Submarine');
             }, 100);
           }
 
@@ -104,6 +107,7 @@ export default function modal() {
             setTimeout(() => {
               this.initialize(board);
               this.startPlaceSequence(board, 'Patrol Boat', 2, 'x');
+              this.displayInfo('PatrolBoat');
             }, 100);
           }
 
@@ -129,5 +133,24 @@ export default function modal() {
         });
       }
     },
+
+    displayInfo(ship) {
+        const name = document.getElementById('ship-name');
+        const imageContainer = document.getElementById('ship-image');
+        const image = document.createElement('img');
+
+        // Change ship name
+        name.innerText = (`Place Your ${ship}...`);
+
+        // Change ship image
+        imageContainer.innerHTML = '';
+        image.src = `../src/images/${ship}.png`;
+        image.classList.add('ship-icon')
+        // Submarine png was wayyy too big. This will re-size it more proptionally
+        if(ship === 'Submarine') {
+          image.style.width = '300px'
+        }
+        imageContainer.appendChild(image);
+    }
   };
 }
