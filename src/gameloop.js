@@ -12,13 +12,6 @@ export default function gameloop() {
     welcomeModal.startPlaceSequence(playerBoard, 'Carrier', 5, 'x');
     welcomeModal.displayInfo('Carrier');
 
-    /// temp player ships
-    playerBoard.placeShip('Carrier', ['A1', 'A2', 'A3', 'A4', 'A5']);
-    playerBoard.placeShip('Battleship', ['B1', 'B2', 'B3', 'B4']);
-    playerBoard.placeShip('Destroyer', ['C1', 'C2', 'C3']);
-    playerBoard.placeShip('Submarine', ['D1', 'D2', 'D3']);
-    playerBoard.placeShip('Patrol Boat', ['E1', 'E2']);
-
     // temp comp ships
     compBoard.placeShip('Carrier', ['A1', 'A2', 'A3', 'A4', 'A5']);
     compBoard.placeShip('Battleship', ['B1', 'B2', 'B3', 'B4']);
