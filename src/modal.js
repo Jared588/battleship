@@ -145,11 +145,7 @@ export default function modal() {
         // Change ship image
         imageContainer.innerHTML = '';
         image.src = `../src/images/${ship}.png`;
-        image.classList.add('ship-icon')
-        // Submarine png was wayyy too big. This will re-size it more proptionally
-        if(ship === 'Submarine') {
-          image.style.width = '300px'
-        }
+        image.style.width = '300px'
         imageContainer.appendChild(image);
     }
   };
