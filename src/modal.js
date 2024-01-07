@@ -1,5 +1,7 @@
+import game from "."; // !dependency cycle
+
 export default function modal() {
-  const modal = document.getElementById('myModal');
+  const myModal = document.getElementById('myModal');
   const modalBoard = document.getElementById('modal-board');
   let Dir = 'x';
   let currentShip = 'Carrier';
@@ -161,7 +163,9 @@ export default function modal() {
             // Update board
             setTimeout(() => {
               this.initialize(board);
-            }, 100);
+              this.closeModal();
+              game.updateBoard();
+            }, 200);
           }
 
           // Flash for confirmation
@@ -200,6 +204,10 @@ export default function modal() {
       }else if(currentShip === 'Submarine') {
         currentShip = 'PatrolBoat';
       }
+    },
+
+    closeModal() {
+      myModal.style.display = 'none';
     }
   };
 }

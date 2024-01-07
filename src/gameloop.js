@@ -1,23 +1,9 @@
 import createPlayer from './player';
-import modal from './modal';
 
 export default function gameloop() {
   const player = createPlayer();
   const playerBoard = player.getPlayerGameboard();
   const compBoard = player.getCompGameBoard();
-
-  // Modal prep
-  const welcomeModal = modal();
-  welcomeModal.initialize(playerBoard);
-  welcomeModal.startPlaceSequence(playerBoard, 'Carrier', 5, 'x');
-  welcomeModal.displayInfo('Carrier');
-
-  // temp comp ships
-  compBoard.placeShip('Carrier', ['A1', 'A2', 'A3', 'A4', 'A5']);
-  compBoard.placeShip('Battleship', ['B1', 'B2', 'B3', 'B4']);
-  compBoard.placeShip('Destroyer', ['C1', 'C2', 'C3']);
-  compBoard.placeShip('Submarine', ['D1', 'D2', 'D3']);
-  compBoard.placeShip('PatrolBoat', ['E1', 'E2']);
 
   return {
     player,
