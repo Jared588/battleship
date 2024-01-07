@@ -1,6 +1,8 @@
 export default function modal() {
   const modal = document.getElementById('myModal');
   const modalBoard = document.getElementById('modal-board');
+  let Dir = 'x';
+  let currentShip = 'Carrier';
 
   return {
     initialize(board) {
@@ -19,22 +21,54 @@ export default function modal() {
     },
 
     startPlaceSequence(board, ship, len, dir) {
+      // listen for and update any direction changes
+      const dirBtn = document.getElementById('dir-btn');
+      const clickHandler = () => {
+        Dir = Dir === 'x' ? 'y' : 'x';
+        this.initialize(board);
+
+        const shipLengths = {
+          Carrier: 5,
+          Battleship: 4,
+          Destroyer: 3,
+          Submarine: 3,
+          'Patrol Boat': 2,
+        };
+
+        this.startPlaceSequence(
+          board,
+          currentShip,
+          shipLengths[currentShip],
+          Dir,
+        );
+        
+        this.displayInfo(currentShip.replace(/\s/g, ''));
+        dirBtn.removeEventListener('click', clickHandler);
+      };
+      dirBtn.addEventListener('click', clickHandler);
+
+      // Placement
+      dir = Dir;
       const grid = board.getGrid();
       const cells = modalBoard.children;
+      let dirOffSet; // Adjustments for placement direction
+      if (dir === 'x') {
+        dirOffSet = 1;
+      } else dirOffSet = 10; // *10 for y-axis placement
 
       // Add visual listeners
       for (let i = 0; i < cells.length; i += 1) {
         cells[i].addEventListener('mouseover', () => {
           for (let j = 0; j < len; j += 1) {
             if (cells[i + j]) {
-              cells[i + j].style.backgroundColor = 'green';
+              cells[i + j * dirOffSet].style.backgroundColor = 'green';
             }
           }
         });
         cells[i].addEventListener('mouseleave', () => {
           for (let j = 0; j < len; j += 1) {
-            if (cells[i + j] && !grid[i + j].occupied) {
-              cells[i + j].style.backgroundColor = '';
+            if (cells[i + j * dirOffSet] && !grid[i + j * dirOffSet].occupied) {
+              cells[i + j * dirOffSet].style.backgroundColor = '';
             }
           }
         });
@@ -43,7 +77,7 @@ export default function modal() {
         cells[i].addEventListener('click', () => {
           // Check for occupation
           for (let j = 0; j < len; j += 1) {
-            if (!cells[i + j] || grid[i + j].occupied) {
+            if (!cells[i + j * dirOffSet] || grid[i + j * dirOffSet].occupied) {
               return;
             }
           }
@@ -52,16 +86,18 @@ export default function modal() {
           if (ship === 'Carrier') {
             board.placeShip('Carrier', [
               `${grid[i].position}`,
-              `${grid[i + 1].position}`,
-              `${grid[i + 2].position}`,
-              `${grid[i + 3].position}`,
-              `${grid[i + 4].position}`,
+              `${grid[i + 1 * dirOffSet].position}`,
+              `${grid[i + 2 * dirOffSet].position}`,
+              `${grid[i + 3 * dirOffSet].position}`,
+              `${grid[i + 4 * dirOffSet].position}`,
             ]);
             // Update board
             setTimeout(() => {
               this.initialize(board);
-              this.startPlaceSequence(board, 'Battleship', 4, 'x');
+              this.startPlaceSequence(board, 'Battleship', 4, dir);
               this.displayInfo('Battleship');
+              this.nextShip();
+              dirBtn.removeEventListener('click', clickHandler);
             }, 100);
           }
 
@@ -69,15 +105,17 @@ export default function modal() {
           else if (ship === 'Battleship') {
             board.placeShip('Battleship', [
               `${grid[i].position}`,
-              `${grid[i + 1].position}`,
-              `${grid[i + 2].position}`,
-              `${grid[i + 3].position}`,
+              `${grid[i + 1 * dirOffSet].position}`,
+              `${grid[i + 2 * dirOffSet].position}`,
+              `${grid[i + 3 * dirOffSet].position}`,
             ]);
             // Update board
             setTimeout(() => {
               this.initialize(board);
-              this.startPlaceSequence(board, 'Destroyer', 3, 'x');
+              this.startPlaceSequence(board, 'Destroyer', 3, dir);
               this.displayInfo('Destroyer');
+              this.nextShip();
+              dirBtn.removeEventListener('click', clickHandler);
             }, 100);
           }
 
@@ -85,14 +123,16 @@ export default function modal() {
           else if (ship === 'Destroyer') {
             board.placeShip('Destroyer', [
               `${grid[i].position}`,
-              `${grid[i + 1].position}`,
-              `${grid[i + 2].position}`,
+              `${grid[i + 1 * dirOffSet].position}`,
+              `${grid[i + 2 * dirOffSet].position}`,
             ]);
             // Update board
             setTimeout(() => {
               this.initialize(board);
-              this.startPlaceSequence(board, 'Submarine', 3, 'x');
+              this.startPlaceSequence(board, 'Submarine', 3, dir);
               this.displayInfo('Submarine');
+              this.nextShip();
+              dirBtn.removeEventListener('click', clickHandler);
             }, 100);
           }
 
@@ -100,14 +140,16 @@ export default function modal() {
           else if (ship === 'Submarine') {
             board.placeShip('Submarine', [
               `${grid[i].position}`,
-              `${grid[i + 1].position}`,
-              `${grid[i + 2].position}`,
+              `${grid[i + 1 * dirOffSet].position}`,
+              `${grid[i + 2 * dirOffSet].position}`,
             ]);
             // Update board
             setTimeout(() => {
               this.initialize(board);
-              this.startPlaceSequence(board, 'Patrol Boat', 2, 'x');
+              this.startPlaceSequence(board, 'Patrol Boat', 2, dir);
               this.displayInfo('PatrolBoat');
+              this.nextShip();
+              dirBtn.removeEventListener('click', clickHandler);
             }, 100);
           }
 
@@ -115,7 +157,7 @@ export default function modal() {
           else if (ship === 'Patrol Boat') {
             board.placeShip('Patrol Boat', [
               `${grid[i].position}`,
-              `${grid[i + 1].position}`,
+              `${grid[i + 1 * dirOffSet].position}`,
             ]);
             // Update board
             setTimeout(() => {
@@ -125,9 +167,9 @@ export default function modal() {
 
           // Flash for confirmation
           for (let k = 0; k < len; k += 1) {
-            cells[i + k].style.backgroundColor = 'rgb(0, 170, 0)';
+            cells[i + k * dirOffSet].style.backgroundColor = 'rgb(0, 170, 0)';
             setTimeout(() => {
-              cells[i + k].style.backgroundColor = 'green';
+              cells[i + k * dirOffSet].style.backgroundColor = 'green';
             }, 200);
           }
         });
@@ -135,18 +177,30 @@ export default function modal() {
     },
 
     displayInfo(ship) {
-        const name = document.getElementById('ship-name');
-        const imageContainer = document.getElementById('ship-image');
-        const image = document.createElement('img');
+      const name = document.getElementById('ship-name');
+      const imageContainer = document.getElementById('ship-image');
+      const image = document.createElement('img');
 
-        // Change ship name
-        name.innerText = (`Place Your ${ship}...`);
+      // Change ship name
+      name.innerText = `Place Your ${ship}...`;
 
-        // Change ship image
-        imageContainer.innerHTML = '';
-        image.src = `../src/images/${ship}.png`;
-        image.style.width = '300px'
-        imageContainer.appendChild(image);
+      // Change ship image
+      imageContainer.innerHTML = '';
+      image.src = `../src/images/${ship}.png`;
+      image.style.width = '300px';
+      imageContainer.appendChild(image);
+    },
+
+    nextShip() {
+      if(currentShip === 'Carrier') {
+        currentShip = 'Battleship';
+      }else if(currentShip === 'Battleship') {
+        currentShip = 'Destroyer';
+      }else if(currentShip === 'Destroyer') {
+        currentShip = 'Submarine';
+      }else if(currentShip === 'Submarine') {
+        currentShip = 'Patrol Boat';
+      }
     }
   };
 }
