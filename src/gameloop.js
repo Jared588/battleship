@@ -17,7 +17,7 @@ export default function gameloop() {
   compBoard.placeShip('Battleship', ['B1', 'B2', 'B3', 'B4']);
   compBoard.placeShip('Destroyer', ['C1', 'C2', 'C3']);
   compBoard.placeShip('Submarine', ['D1', 'D2', 'D3']);
-  compBoard.placeShip('Patrol Boat', ['E1', 'E2']);
+  compBoard.placeShip('PatrolBoat', ['E1', 'E2']);
 
   return {
     player,

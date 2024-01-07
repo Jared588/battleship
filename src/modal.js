@@ -32,7 +32,7 @@ export default function modal() {
           Battleship: 4,
           Destroyer: 3,
           Submarine: 3,
-          'Patrol Boat': 2,
+          PatrolBoat: 2,
         };
 
         this.startPlaceSequence(
@@ -42,7 +42,6 @@ export default function modal() {
           Dir,
         );
         
-        this.displayInfo(currentShip.replace(/\s/g, ''));
         dirBtn.removeEventListener('click', clickHandler);
       };
       dirBtn.addEventListener('click', clickHandler);
@@ -146,7 +145,7 @@ export default function modal() {
             // Update board
             setTimeout(() => {
               this.initialize(board);
-              this.startPlaceSequence(board, 'Patrol Boat', 2, dir);
+              this.startPlaceSequence(board, 'PatrolBoat', 2, dir);
               this.displayInfo('PatrolBoat');
               this.nextShip();
               dirBtn.removeEventListener('click', clickHandler);
@@ -154,8 +153,8 @@ export default function modal() {
           }
 
           // Patrol Boat
-          else if (ship === 'Patrol Boat') {
-            board.placeShip('Patrol Boat', [
+          else if (ship === 'PatrolBoat') {
+            board.placeShip('PatrolBoat', [
               `${grid[i].position}`,
               `${grid[i + 1 * dirOffSet].position}`,
             ]);
@@ -199,7 +198,7 @@ export default function modal() {
       }else if(currentShip === 'Destroyer') {
         currentShip = 'Submarine';
       }else if(currentShip === 'Submarine') {
-        currentShip = 'Patrol Boat';
+        currentShip = 'PatrolBoat';
       }
     }
   };

@@ -67,8 +67,8 @@ export default function gameboard() {
         Submarine = createShip('Submarine', 3, 0, false);
         newShip = Submarine;
         SubmarineCount += 1;
-      } else if (ship === 'Patrol Boat' && PatrolBoatCount < 1) {
-        PatrolBoat = createShip('Patrol Boat', 2, 0, false);
+      } else if (ship === 'PatrolBoat' && PatrolBoatCount < 1) {
+        PatrolBoat = createShip('PatrolBoat', 2, 0, false);
         newShip = PatrolBoat;
         PatrolBoatCount += 1;
       } else return;
@@ -107,7 +107,7 @@ export default function gameboard() {
           hitShots.push(position);
           numberOfHits += 1;
           this.checkEndGame(numberOfHits);
-        } else if (gridPoint.ship === 'Patrol Boat') {
+        } else if (gridPoint.ship === 'PatrolBoat') {
           PatrolBoat.hit();
           hitShots.push(position);
           numberOfHits += 1;
@@ -132,7 +132,7 @@ export default function gameboard() {
       if (ship === 'Submarine') {
         return Submarine;
       }
-      if (ship === 'Patrol Boat') {
+      if (ship === 'PatrolBoat') {
         return PatrolBoat;
       }
       return null;
