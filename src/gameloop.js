@@ -78,5 +78,68 @@ export default function gameloop() {
         compDisplay.appendChild(cell);
       }
     },
+
+    placeEnemyShip(name, len, game) {
+      const randomNum = Math.round(Math.random()); // Get random value to decide x-axis or y-axis
+      const grid = game.compBoard.getGrid();
+      const shipPositions = [];
+      let valid = true;
+
+      if (randomNum === 0) {
+        // x-axis
+        const randomX = Math.floor(Math.random() * (len + 1));
+        const randomY = Math.floor(Math.random() * 10);
+        const randomLetter = String.fromCharCode(randomY + 65);
+
+        // Check for occupation
+        for (let i = 0; i < len; i += 1) {
+          /* console.log(grid[(randomY * 10) + (randomX + i)].position) */
+          if (grid[randomY * 10 + (randomX + i)].occupied) {
+            valid = false;
+            break;
+          }
+        }
+
+        if (valid === true) {
+          // Place if valid
+          for (let i = 0; i < len; i += 1) {
+            shipPositions.push(`${randomLetter + (randomX + i + 1)}`);
+          }
+        } else {
+          // Repeat process if invalid
+          this.placeEnemyShip(name, len, game);
+        }
+      } else if (randomNum === 1) {
+        // y-axis
+        const randomX = Math.floor(Math.random() * 10);
+        const randomY = Math.floor(Math.random() * (len + 1));
+        const randomLetter = String.fromCharCode(randomY + 65);
+
+        // Check for occupation
+        for (let i = 0; i < len; i += 1) {
+          /* console.log(grid[((randomY + i) * 10) + randomX].position) */
+          if (grid[(randomY + i) * 10 + randomX].occupied) {
+            valid = false;
+            break;
+          }
+        }
+
+        if (valid === true) {
+          // Place if valid
+          for (let i = 0; i < len; i += 1) {
+            const currentLetterAscii = randomLetter.charCodeAt(0) + i;
+            const currentLetter = String.fromCharCode(currentLetterAscii);
+            shipPositions.push(`${currentLetter}${randomX + 1}`);
+          }
+        } else {
+          // Repeat process if invalid
+          this.placeEnemyShip(name, len, game);
+        }
+      }
+
+      // Placement
+      /* console.log(shipPositions); */
+      game.compBoard.placeShip(name, shipPositions);
+    },
   };
 }

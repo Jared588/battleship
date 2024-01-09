@@ -10,13 +10,22 @@ game.updateBoard();
 // Setup placement
 const welcomeModal = modal();
 welcomeModal.initialize(game.playerBoard);
-welcomeModal.startPlaceSequence(game.playerBoard, 'Carrier', 5, 'x');
+welcomeModal.startPlaceSequence(game.playerBoard, 'Carrier', 5, 'x', game);
 welcomeModal.displayInfo('Carrier');
 game.updateBoard();
 
+// Randomize enemy ship placement
+game.placeEnemyShip('Carrier', 5, game);
+game.placeEnemyShip('Battleship', 4, game);
+game.placeEnemyShip('Destroyer', 3, game);
+game.placeEnemyShip('Submarine', 3, game);
+game.placeEnemyShip('PatrolBoat', 2, game);
+
+/*
 // temp comp ships
 game.compBoard.placeShip('Carrier', ['A1', 'A2', 'A3', 'A4', 'A5']);
 game.compBoard.placeShip('Battleship', ['B1', 'B2', 'B3', 'B4']);
 game.compBoard.placeShip('Destroyer', ['C1', 'C2', 'C3']);
 game.compBoard.placeShip('Submarine', ['D1', 'D2', 'D3']);
 game.compBoard.placeShip('PatrolBoat', ['E1', 'E2']);
+*/

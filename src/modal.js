@@ -1,5 +1,3 @@
-import game from "."; // !dependency cycle
-
 export default function modal() {
   const myModal = document.getElementById('myModal');
   const modalBoard = document.getElementById('modal-board');
@@ -22,7 +20,7 @@ export default function modal() {
       }
     },
 
-    startPlaceSequence(board, ship, len, dir) {
+    startPlaceSequence(board, ship, len, dir, game) {
       // listen for and update any direction changes
       const dirBtn = document.getElementById('dir-btn');
       const clickHandler = () => {
@@ -42,6 +40,7 @@ export default function modal() {
           currentShip,
           shipLengths[currentShip],
           Dir,
+          game,
         );
         
         dirBtn.removeEventListener('click', clickHandler);
@@ -95,7 +94,7 @@ export default function modal() {
             // Update board
             setTimeout(() => {
               this.initialize(board);
-              this.startPlaceSequence(board, 'Battleship', 4, dir);
+              this.startPlaceSequence(board, 'Battleship', 4, dir, game);
               this.displayInfo('Battleship');
               this.nextShip();
               dirBtn.removeEventListener('click', clickHandler);
@@ -113,7 +112,7 @@ export default function modal() {
             // Update board
             setTimeout(() => {
               this.initialize(board);
-              this.startPlaceSequence(board, 'Destroyer', 3, dir);
+              this.startPlaceSequence(board, 'Destroyer', 3, dir, game);
               this.displayInfo('Destroyer');
               this.nextShip();
               dirBtn.removeEventListener('click', clickHandler);
@@ -130,7 +129,7 @@ export default function modal() {
             // Update board
             setTimeout(() => {
               this.initialize(board);
-              this.startPlaceSequence(board, 'Submarine', 3, dir);
+              this.startPlaceSequence(board, 'Submarine', 3, dir, game);
               this.displayInfo('Submarine');
               this.nextShip();
               dirBtn.removeEventListener('click', clickHandler);
@@ -147,7 +146,7 @@ export default function modal() {
             // Update board
             setTimeout(() => {
               this.initialize(board);
-              this.startPlaceSequence(board, 'PatrolBoat', 2, dir);
+              this.startPlaceSequence(board, 'PatrolBoat', 2, dir, game);
               this.displayInfo('PatrolBoat');
               this.nextShip();
               dirBtn.removeEventListener('click', clickHandler);
