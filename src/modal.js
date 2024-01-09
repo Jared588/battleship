@@ -48,7 +48,6 @@ export default function modal() {
       dirBtn.addEventListener('click', clickHandler);
 
       // Placement
-      dir = Dir;
       const grid = board.getGrid();
       const cells = modalBoard.children;
       let dirOffSet; // Adjustments for placement direction
