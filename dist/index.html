@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Battleship</title>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>⚔️</text></svg>">
+  <script defer src="index.bundle.js"></script><script defer src="ships.bundle.js"></script><script defer src="player.bundle.js"></script><script defer src="gameloop.bundle.js"></script><script defer src="modal.bundle.js"></script><script defer src="gameOver.bundle.js"></script></head>
+  <body>
+    <header>Battleship</header>
+    <div id="myModal" class="modal">
+      <div class="modal-content">
+        <p id="welcome-text">Welcome To Battleship!</p>
+        <div id="modal-container">
+          <div id="modal-info-container">
+            <p id="ship-name"></p>
+            <div id="dir-btn"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><title>rotate-right-variant</title><path d="M10,4V1L14,5L10,9V6A6,6 0 0,0 4,12L4.08,13H2.06L2,12A8,8 0 0,1 10,4M17,2H20A2,2 0 0,1 22,4V20A2,2 0 0,1 20,22H17A2,2 0 0,1 15,20V4A2,2 0 0,1 17,2M4,15H13V22H4A2,2 0 0,1 2,20V17A2,2 0 0,1 4,15Z" fill="currentcolor"/></svg></div>
+            <div id="ship-image"></div>
+          </div>
+          <div id="modal-board"></div>
+        </div>
+      </div>
+    </div>
+    <div id="game-over-modal">
+      <div class="game-over-content">
+        <p id="game-over-text">You Win!</p>
+        <p id="retry-btn">Retry?</p>
+      </div>
+    </div>
+    <div class="main">
+      <div class="gameboard" id="player-board"></div>
+      <div class="gameboard" id="comp-board"></div>
+    </div>
+    <footer>Copyright @ Jared Price</footer>
+  </body>
+</html>
