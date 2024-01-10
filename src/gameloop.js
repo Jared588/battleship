@@ -36,7 +36,7 @@ export default function gameloop() {
             .getMissedShots()
             .includes(playerBoard.getGrid()[i].position)
         ) {
-          cell.style.background = 'orange';
+          cell.style.background = 'rgba(155, 155, 155, 0.5)';
         }
 
         cell.textContent = playerBoard.getGrid()[i].position;
@@ -71,7 +71,7 @@ export default function gameloop() {
         if (
           compBoard.getMissedShots().includes(compBoard.getGrid()[i].position)
         ) {
-          cell.style.background = 'orange';
+          cell.style.background = 'rgba(155, 155, 155, 0.5)';
         }
         cell.textContent = compBoard.getGrid()[i].position;
 
