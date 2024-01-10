@@ -1,3 +1,9 @@
+import Carrier from './images/Carrier.png'
+import Battleship from './images/Battleship.png'
+import Destroyer from './images/Destroyer.png'
+import Submarine from './images/Submarine.png'
+import PatrolBoat from './images/PatrolBoat.png'
+
 export default function modal() {
   const myModal = document.getElementById('myModal');
   const modalBoard = document.getElementById('modal-board');
@@ -181,13 +187,21 @@ export default function modal() {
       const name = document.getElementById('ship-name');
       const imageContainer = document.getElementById('ship-image');
       const image = document.createElement('img');
-
+    
       // Change ship name
       name.innerText = `Place Your ${ship}...`;
-
+    
       // Change ship image
+      const shipImages = {
+        'Carrier': Carrier,
+        'Battleship': Battleship,
+        'Destroyer': Destroyer,
+        'Submarine': Submarine,
+        'PatrolBoat': PatrolBoat,
+      };
+      
       imageContainer.innerHTML = '';
-      image.src = `../src/images/${ship}.png`;
+      image.src = shipImages[ship];
       image.style.width = '300px';
       imageContainer.appendChild(image);
     },
