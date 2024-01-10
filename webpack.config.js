@@ -8,7 +8,8 @@ module.exports = {
     ships: './src/ships.js',
     player: './src/player.js',
     gameloop: './src/gameloop.js',
-    modal: './src/modal.js'
+    modal: './src/modal.js',
+    gameOver: './src/game-over.js'
   },
   plugins: [
     new HtmlWebpackPlugin({
