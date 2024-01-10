@@ -1,4 +1,5 @@
 import createPlayer from './player';
+import gameOver from './game-over';
 
 export default function gameloop() {
   const player = createPlayer();
@@ -52,14 +53,14 @@ export default function gameloop() {
           player.playerAttack(compBoard.getGrid()[i].position);
           this.updateBoard();
           if (playerBoard.checkEndGame(compBoard.getNumberOfHits())) {
-            alert('Player Wins!');
+            gameOver('win');
             return;
           }
           setTimeout(() => {
             player.compAttack();
             this.updateBoard();
             if (playerBoard.checkEndGame(playerBoard.getNumberOfHits())) {
-              alert('Computer Wins!');
+              gameOver('lose');
             }
           }, 800);
         });
